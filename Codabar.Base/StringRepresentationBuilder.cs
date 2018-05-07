@@ -24,7 +24,7 @@ namespace Codabar.Base
             }
             
 
-            return sb.ToString();
+            return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
         private string ToCodabar(char symbol)
