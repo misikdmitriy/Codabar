@@ -11,47 +11,13 @@
 </head>
 
 <body ng-app="productApp">
-    <div class="container" ng-controller="productController as ctrl">
-        <div class="row">
-            <div class="col-sm">
-                <h3>Product name</h3>
-            </div>
-            <div class="col-sm">
-                <h3>Code</h3>
-            </div>
-            <div class="col-sm">
-                <h3>Remained</h3>
-            </div>
-            <div class="col-sm">
-                <h3>Units</h3>
-            </div>
-            <div class="col-sm">
-                <h3>Codabar</h3>
-            </div>
-        </div>
-        <div class="row" ng-repeat="x in ctrl.products">
-            <div class="col-sm">
-                {{x.name}}
-            </div>
-            <div class="col-sm">
-                {{x.code}}
-            </div>
-            <div class="col-sm">
-                {{x.remained}}
-            </div>
-            <div class="col-sm">
-                {{x.unit.name}}
-            </div>
-            <div class="col-sm">
-                <a ng-href="http://localhost:50482/api/products/codabar/{{x.id}}" target="_self">Get</a>
-            </div>
-        </div>
+    <div class="container" ng-view>
     </div>
 
     <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
 
     <script src="index.js"></script>
-
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -1,0 +1,38 @@
+<div ng-controller="productController as ctrl">
+    <table class="table table-bordred table-striped">
+        <thead>
+            <th>
+                <h3>Product name</h3>
+            </th>
+            <th>
+                <h3>Code</h3>
+            </th>
+            <th>
+                <h3>Barcode</h3>
+            </th>
+            <th>
+                <h3>Remove</h3>
+            </th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in ctrl.products">
+                <td>
+                    {{x.name}}
+                </td>
+                <td>
+                    {{x.code}}
+                </td>
+                <td>
+                    <a ng-href="http://localhost:50482/api/products/codabar/{{x.id}}" target="_self">Get</a>
+                </td>
+                <td>
+                    <button ng-click="ctrl.remove(x.id)" type="button" class="btn btn-danger btn-sm">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="additional-btns">
+        <button onclick="location.href = '#!add';" type="button" class="btn btn-success btn-lg">Add</button>
+    </div>
+</div>

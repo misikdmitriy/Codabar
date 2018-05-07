@@ -8,7 +8,6 @@ namespace CodabarWeb.Context
     public sealed class AppDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
-        public DbSet<Unit> Units { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
@@ -18,7 +17,6 @@ namespace CodabarWeb.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new UnitEntityTypeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

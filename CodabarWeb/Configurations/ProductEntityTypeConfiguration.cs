@@ -11,10 +11,6 @@ namespace CodabarWeb.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Code).IsRequired();
-            builder.Property(x => x.Remained).IsRequired();
-            builder.HasOne(x => x.Unit)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

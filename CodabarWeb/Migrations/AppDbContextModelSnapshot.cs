@@ -31,38 +31,9 @@ namespace CodabarWeb.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<decimal>("Remained");
-
-                    b.Property<int?>("UnitId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UnitId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("CodabarWeb.Models.Unit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("IsFloat");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Units");
-                });
-
-            modelBuilder.Entity("CodabarWeb.Models.Product", b =>
-                {
-                    b.HasOne("CodabarWeb.Models.Unit", "Unit")
-                        .WithMany()
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }
