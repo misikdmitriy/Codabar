@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodabarWeb", "CodabarWeb\CodabarWeb.csproj", "{D9F1F23F-70E4-44DA-ACE2-0E2E1B70CAF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codabar.Base", "Codabar.Base\Codabar.Base.csproj", "{88E29681-6BC8-4CE2-A524-02B96EA01648}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9F1F23F-70E4-44DA-ACE2-0E2E1B70CAF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F1F23F-70E4-44DA-ACE2-0E2E1B70CAF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F1F23F-70E4-44DA-ACE2-0E2E1B70CAF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F1F23F-70E4-44DA-ACE2-0E2E1B70CAF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E29681-6BC8-4CE2-A524-02B96EA01648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E29681-6BC8-4CE2-A524-02B96EA01648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E29681-6BC8-4CE2-A524-02B96EA01648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E29681-6BC8-4CE2-A524-02B96EA01648}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E1EEABC-D350-48D0-8B14-39369FAE25E0}
+	EndGlobalSection
+EndGlobal
