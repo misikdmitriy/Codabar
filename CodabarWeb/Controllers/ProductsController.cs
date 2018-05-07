@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using Codabar.Base;
 using CodabarWeb.Models;
 using Dapper;
@@ -65,18 +66,21 @@ namespace CodabarWeb.Controllers
                 var product = conn.Query<Product>(GetOneProductById, new { Id = id })
                     .First();
 
-                var builder = new StringRepresentationBuilder();
-                var bits = builder.ToCodabar($"a{product.Code}b");
+                var algorithmArgs = new AlgorithmArgs
+                {
+                    LineHeight = 150,
+                    LineWidth = 5,
+                    StartSymbol = 'a',
+                    EndSymbol = 'b',
+                    Text = product.Code
+                };
 
-                var @params = new CodabarParams(10, 125);
-
-                using (var image = new BitmapConverter().Convert(bits, @params))
+                using (var image = new CodabarCreator().Run(algorithmArgs))
                 using (var stream = new MemoryStream())
                 {
                     image.Save(stream, new PngEncoder());
-                    return File(stream.GetBuffer(),
-                        System.Net.Mime.MediaTypeNames.Application.Octet,
-                        $"{id}.png");
+
+                    return File(stream.GetBuffer(), MediaTypeNames.Application.Octet, $"{id}.png");
                 }
             }
         }

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using CommandLine;
-using SixLabors.ImageSharp.Formats.Bmp;
+using SixLabors.ImageSharp.Formats.Png;
 
 namespace Codabar.Base
 {
@@ -8,22 +8,15 @@ namespace Codabar.Base
     {
         public static void Main(string[] args)
         {
-            Parser.Default.ParseArguments<CommandLineArgs>(args)
-                .WithParsed(Run);
-        }
-
-        public static void Run(CommandLineArgs args)
-        {
-            var builder = new StringRepresentationBuilder();
-            var bits = builder.ToCodabar($"a{args.Text}b");
-
-            var @params = new CodabarParams(10, 125);
-
-            using (var image = new BitmapConverter().Convert(bits, @params))
-            using (var file = File.OpenWrite(args.OutputPath))
-            {
-                image.Save(file, new BmpEncoder());
-            }
+            Parser.Default.ParseArguments<AlgorithmArgs>(args)
+                .WithParsed(algorithmArgs =>
+                {
+                    using (var image = new CodabarCreator().Run(algorithmArgs))
+                    using (var file = File.OpenWrite(algorithmArgs.OutputPath))
+                    {
+                        image.Save(file, new PngEncoder());
+                    }
+                });
         }
     }
 }
