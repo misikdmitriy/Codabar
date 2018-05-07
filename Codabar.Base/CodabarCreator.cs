@@ -1,6 +1,4 @@
-﻿using System.IO;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Png;
+﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace Codabar.Base

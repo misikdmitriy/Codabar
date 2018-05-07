@@ -17,10 +17,10 @@ namespace CodabarWeb.Controllers
     [EnableCors("MyPolicy")]
     public class ProductsController : Controller
     {
-        private static readonly string GetAllProducts = "select * from [dbo].[Products] p order by p.[Id]";
-        private static readonly string InsertProduct = "insert into [dbo].[Products](Name, Code) values(@Name, @Code)";
-        private static readonly string DeleteProductById = "delete p from [dbo].[Products] p where p.[Id] = @Id";
-        private static readonly string GetOneProductById = "select * from [dbo].[Products] p where p.[Id] = @Id order by p.[Id]";
+        private const string GetAllProducts = "select * from [dbo].[Products] p order by p.[Id]";
+        private const string InsertProduct = "insert into [dbo].[Products](Name, Code) values(@Name, @Code)";
+        private const string DeleteProductById = "delete p from [dbo].[Products] p where p.[Id] = @Id";
+        private const string GetOneProductById = "select * from [dbo].[Products] p where p.[Id] = @Id order by p.[Id]";
 
         [HttpGet]
         public IActionResult ProductGet()
