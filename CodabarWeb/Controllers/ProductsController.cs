@@ -81,6 +81,26 @@ namespace CodabarWeb.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("decode/{fileName}")]
+        public IActionResult Decode(string fileName)
+        {
+            using (var conn = CreateConnection())
+            {
+                var id = int.Parse(fileName.Split(".")[0]);
+
+                var product = conn.Query<Product>(GetOneProductById, new {Id = id})
+                    .FirstOrDefault();
+
+                if (product == null)
+                {
+                    return BadRequest("Unrecognised image");
+                }
+
+                return Ok(product);
+            }
+        }
+
         private DbConnection CreateConnection()
         {
             var builder = new ConfigurationBuilder()

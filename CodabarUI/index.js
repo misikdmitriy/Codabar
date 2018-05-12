@@ -9,6 +9,8 @@ productApp.config(function ($routeProvider) {
         templateUrl: "items.htm"
     }).when("/add", {
         templateUrl: "add.htm"
+    }).when("/decode", {
+        templateUrl: "decode.htm"
     });
 });
 
@@ -56,3 +58,11 @@ productApp.controller("productAddController", function productAddController($sco
         });
     }
 });
+
+function fileNameChanged() {
+    var fileInput = document.getElementById("fileUpload");
+
+    $.post("http://localhost:50482/api/products/decode/" + fileInput.files[0].name, function(resp) {
+        console.log(resp);
+    });
+}
