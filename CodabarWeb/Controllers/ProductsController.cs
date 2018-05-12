@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -91,17 +92,19 @@ namespace CodabarWeb.Controllers
         {
             using (var conn = CreateConnection())
             {
-                var id = int.Parse(fileName.Split(".")[0]);
-
-                var product = conn.Query<Product>(GetOneProductById, new {Id = id})
-                    .FirstOrDefault();
-
-                if (product == null)
+                try
                 {
-                    return BadRequest("Unrecognised image");
-                }
+                    var id = int.Parse(fileName.Split(".")[0]);
 
-                return Ok(product);
+                    var product = conn.Query<Product>(GetOneProductById, new { Id = id })
+                        .First();
+
+                    return Ok(product);
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
             }
         }
 

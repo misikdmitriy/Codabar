@@ -64,5 +64,6 @@ function fileNameChanged() {
 
     $.post("http://localhost:50482/api/products/decode/" + fileInput.files[0].name, function(resp) {
         console.log(resp);
+        alert(resp.name);
     });
 }
