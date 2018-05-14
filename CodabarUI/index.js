@@ -2,7 +2,7 @@
     "use strict";
 })();
 
-var productApp = angular.module('productApp', ["ngRoute"]);
+var productApp = angular.module('productApp', ["ngRoute", "ngFileUpload"]);
 
 productApp.config(function ($routeProvider) {
     $routeProvider.when("/", {
@@ -59,11 +59,21 @@ productApp.controller("productAddController", function productAddController($sco
     }
 });
 
-function fileNameChanged() {
-    var fileInput = document.getElementById("fileUpload");
+productApp.controller("productDecodeController", function productDecodeController($scope, Upload) {
+    var ctrl = this;
 
-    $.post("http://localhost:50482/api/products/decode/" + fileInput.files[0].name, function(resp) {
-        console.log(resp);
-        alert(resp.name);
-    });
-}
+    ctrl.submit = function () {
+        Upload.upload({
+            url: 'http://localhost:50482/api/products/decode',
+            data: {
+                file: ctrl.file
+            }
+        }).then(function (resp) {
+            ctrl.name = resp.data.name;
+            ctrl.isUnrecognised = false;
+        }, function(resp) {
+            ctrl.name = null;
+            ctrl.isUnrecognised = true;
+        });
+    };
+});

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
@@ -8,9 +9,12 @@ using Codabar.Base;
 using CodabarWeb.Models;
 using Dapper;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace CodabarWeb.Controllers
 {
@@ -79,6 +83,7 @@ namespace CodabarWeb.Controllers
                 using (var image = new CodabarCreator().Run(algorithmArgs))
                 using (var stream = new MemoryStream())
                 {
+                    image[0, 0] = new Rgba32(0, id / (float)255.0, 0);
                     image.Save(stream, new PngEncoder());
 
                     return File(stream.GetBuffer(), MediaTypeNames.Application.Octet, $"{id}.png");
@@ -87,19 +92,23 @@ namespace CodabarWeb.Controllers
         }
 
         [HttpPost]
-        [Route("decode/{fileName}")]
-        public IActionResult Decode(string fileName)
+        [Route("decode")]
+        public IActionResult Decode(IFormFile files)
         {
             using (var conn = CreateConnection())
             {
                 try
                 {
-                    var id = int.Parse(fileName.Split(".")[0]);
+                    using (var file = Request.Form.Files.First().OpenReadStream())
+                    using (var image = Image.Load<Rgba32>(file))
+                    {
+                        var id = image[0, 0].G;
 
-                    var product = conn.Query<Product>(GetOneProductById, new { Id = id })
-                        .First();
+                        var product = conn.Query<Product>(GetOneProductById, new { Id = id })
+                            .First();
 
-                    return Ok(product);
+                        return Ok(product);
+                    }
                 }
                 catch (Exception)
                 {

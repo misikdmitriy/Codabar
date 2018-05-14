@@ -1,4 +1,20 @@
-<div>
-    <input type="file" id="fileUpload" onchange="fileNameChanged()">
-    <button onclick="location.href = '#!';" type="button" class="btn btn-danger">Back</button>
+<div ng-controller="productDecodeController as ctrl">
+    <form>
+        <div class="btn" ngf-select ng-model="ctrl.file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select</div>
+        <button class="btn btn-success" type="submit" ng-click="ctrl.submit()">Submit</button>
+    </form>
+
+    <div class="row">
+        <div class="col align-self-start"></div>
+        <div class="col align-self-center" ng-show="ctrl.name">
+            <h2>It is {{ctrl.name}}</h2>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="col align-self-start"></div>
+            <div class="col align-self-center" ng-show="ctrl.isUnrecognised">
+                <h2>Unrecognized object</h2>
+            </div>
+        </div>
 </div>
